@@ -20,4 +20,14 @@ class NewcharactersController < ApplicationController
     def newcharacter_params
        params.require(:newcharacter).permit(:name, :age, :world, :enjoys)
     end
+
+    def destroy
+        # Destroy a Newcharacter
+        deletecharacter = Newcharacter.find(params[:id])
+        if deletecharacter.destroy
+            render json: deletecharacter
+        else
+            render json: deletecharacter.errors, status: :unprocessable_entity
+        end
+    end
 end
